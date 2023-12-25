@@ -20,11 +20,11 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      createAt: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updateAt: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }

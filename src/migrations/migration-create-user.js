@@ -11,7 +11,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      passWord: {
+      password: {
         type: Sequelize.STRING
       },
       firstName: {
@@ -26,14 +26,17 @@ module.exports = {
       gender: {
         type: Sequelize.STRING
       },
-      releid: {
+      typeRole: {
         type: Sequelize.STRING
       },
-      createAt: {
+      keyRole: {
+        type: Sequelize.STRING
+      },
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updateAt: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }
