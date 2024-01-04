@@ -107,14 +107,24 @@ let getAllUsers = (userId) => {
 let createNewUser = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            //check email is exist ???
-            let check = await checkUserEmail(data.email);
+            // Kiểm tra xem email đã được sử dụng chưa
+            let check;
+            try {
+                check = await checkUserEmail(data.email);
+            } catch (checkError) {
+                reject(checkError); // Xử lý lỗi trong quá trình kiểm tra email
+                return;
+            }
+
             if (check === true) {
                 resolve({
                     errCode: 1,
-                    message: 'Your email is already in used, Plz try another email'
-                })
+                    message: "Your email has been used. Please try another email."
+                });
+                return;
             }
+
+            // Hash mật khẩu và tạo một người dùng mới
             let hashPasswordFromBcrypt = await hashUserPassword(data.password);
             await db.User.create({
                 email: data.email,
@@ -125,17 +135,17 @@ let createNewUser = (data) => {
                 phonenumber: data.phonenumber,
                 gender: data.gender === '1' ? true : false,
                 roleId: data.roleId
-            })
+            });
 
             resolve({
                 errCode: 0,
                 message: 'OK'
-            })
+            });
         } catch (e) {
-            reject(e)
+            reject(e);
         }
-    })
-}
+    });
+};
 
 let deleteUser = (userId) => {
     return new Promise(async (resolve, reject) => {
