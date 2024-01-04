@@ -119,7 +119,7 @@ let createNewUser = (data) => {
             if (check === true) {
                 resolve({
                     errCode: 1,
-                    message: "Your email has been used. Please try another email."
+                    errMessage: "Your email has been used. Please try another email."
                 });
                 return;
             }
